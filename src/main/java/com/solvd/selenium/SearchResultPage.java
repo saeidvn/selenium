@@ -10,7 +10,7 @@ import java.util.List;
 public class SearchResultPage {
 
     public WebDriver driver;
-    
+
     @FindBy(xpath = "//div[@class='count___1ZIhY gl-body--s']")
     private List<WebElement> productResult;
 
