@@ -1,5 +1,7 @@
 package com.solvd.selenium.adidas;
 
+import com.qaprosoft.carina.core.foundation.report.testrail.TestRailCases;
+import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +27,9 @@ public class AdidasTest {
         driver = new ChromeDriver();
     }
 
-    @Test
+    @Test(description = "Search some product with a search bar ")
+    @TestRailCases(testCasesId = "5")
+    @MethodOwner(owner = "Saeid Vahidnia", platform = "web")
     public void checkProductName() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
         adidasHomePage.typeInSearchInput("BLACKHAWKS HOME AUTHENTIC JERSEY");
@@ -41,6 +45,20 @@ public class AdidasTest {
             LOGGER.info(searchItem.getText());
         });
         softAssert.assertAll();
+    }
+
+    @Test(description = "Login to account.")
+    @TestRailCases(testCasesId = "2")
+    @MethodOwner(owner = "Saeid Vahidnia", platform = "web")
+    public void checkLogin() {
+        AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
+        adidasHomePage.clickLoginButton();
+        adidasHomePage.clickLoginBox();
+        adidasHomePage.typeLoginEmail("x7en0mx@yahoo.com");
+        adidasHomePage.submitContinueButton();
+        adidasHomePage.typeLoginPassword("THP-bmy.ack1xed*amq");
+        adidasHomePage.submitLoginAccountButton();
+
     }
 
     @AfterMethod

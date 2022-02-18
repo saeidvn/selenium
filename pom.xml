@@ -47,11 +47,24 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.qaprosoft</groupId>
+      <artifactId>carina-core</artifactId>
+      <version>${carina.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.qaprosoft</groupId>
+      <artifactId>carina-api</artifactId>
+      <version>${carina.version}</version>
+    </dependency>
+
   </dependencies>
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <carina.version>7.2.14</carina.version>
   </properties>
 
 </project>
