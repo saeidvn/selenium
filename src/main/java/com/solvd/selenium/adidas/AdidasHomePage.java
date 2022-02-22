@@ -6,13 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static java.time.Duration.*;
 
 public class AdidasHomePage {
 
@@ -74,7 +76,7 @@ public class AdidasHomePage {
     @FindBy(xpath = "//*[@data-auto-id='login-form-login']")
     private WebElement loginAccountButton;
 
-//    @FindBy(xpath = "//*[contains(@class, 'col-l-2')]")
+    //    @FindBy(xpath = "//*[contains(@class, 'col-l-2')]")
     @FindBy(css = ".gl-heading--m")
     private WebElement myAccount;
 
@@ -88,8 +90,9 @@ public class AdidasHomePage {
     private WebElement filterButton;
 
 //    @FindBy(xpath = "//a[@manual_cm_sp='header-_-customerinfo-_-Help']")
-    @FindBy(xpath = "//div[@class='inner___1T3DW']//a[@href='/us/help']")
+//    @FindBy(xpath = "//div[@class='inner___1T3DW']//a[@href='/us/help']")
 //    @FindBy(xpath = "//a[@href='/us/help']")
+    @FindBy(xpath = "//*[contains(@class,'inner___1T3DW')]//*[contains(@manual_cm_sp,'Help')]")
     public WebElement helpButton;
 
     @FindBy(xpath = "//div[@class='gl-wishlist-icon wishlist_button___3ppwb outlined-icon-color___2xwB3']")
@@ -99,34 +102,44 @@ public class AdidasHomePage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         this.driver.get("https://www.adidas.com/us");
+//        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
     }
 
-    public boolean isPageOpened(){
+    public boolean isPageOpened() {
         return driver.getCurrentUrl().equals("https://www.adidas.com/us");
     }
 
-    public void typeInSearchInput(String productName){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        searchInput.sendKeys(productName);
+    public void typeInSearchInput(String productName) {
+        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(searchInput));
+        webElement.click();
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        searchInput.sendKeys(productName);
     }
 
-    public void submitSearchButton(){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        searchButton.submit();
+    public void submitSearchButton() {
+        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(searchButton));
+        webElement.click();
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        searchButton.submit();
+    }
+
+    public boolean isLoginBoxIsVisible(){
+        return loginBox.isDisplayed();
+    }
+
+    public void enterTextToLoginBox(String email) {
+        loginBox.click();
+        loginBox.sendKeys(email);
+    }
+
+    public String getTextFromLoginBox(){
+        return loginBox.getAttribute("value");
     }
 
     public void clickLoginButton() {
         loginButton.click();
-    }
-
-    public void clickLoginBox() {
-        loginBox.click();
-    }
-
-    public void typeLoginEmail(String email) {
-        loginEmail.sendKeys(email);
-//        clickLoginButton();
-//        loginBox.sendKeys(email);
     }
 
     public void submitContinueButton() {
@@ -135,7 +148,7 @@ public class AdidasHomePage {
 
     public void clickPasswordBox() {
 //        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement webElement = new WebDriverWait(driver, Duration.ofSeconds(10))
+        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(passwordBox));
         webElement.click();
     }
@@ -151,11 +164,10 @@ public class AdidasHomePage {
     }
 
     public void clickHelpButton() {
-//        driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
-        WebElement webElement = new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(helpButton));
-        webElement.click();
-//        helpButton.click();
+//        WebDriverWait wait = new WebDriverWait(this.driver, ofSeconds(20));
+//        wait.until(ExpectedConditions.elementToBeClickable(helpButton));
+        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+        helpButton.click();
     }
 
     public void clickWishListButton() {

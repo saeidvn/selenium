@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -68,20 +67,17 @@ public class AdidasTest {
     public void checkLogin() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
         Assert.assertTrue(adidasHomePage.isPageOpened(), "Page not found.");
+
         adidasHomePage.clickLoginButton();
-        adidasHomePage.clickLoginBox();
-        adidasHomePage.typeLoginEmail("x7en0mx@yahoo.com");
+        Assert.assertTrue(adidasHomePage.isLoginBoxIsVisible());
+
+        adidasHomePage.enterTextToLoginBox("x7en0mx@yahoo.com");
+        Assert.assertEquals(adidasHomePage.getTextFromLoginBox(), "x7en0mx@yahoo.com", "Data not equals");
+
         adidasHomePage.submitContinueButton();
         adidasHomePage.clickPasswordBox();
         adidasHomePage.typeLoginPassword("THP-bmy.ack1xed*amq");
         adidasHomePage.submitLoginAccountButton();
-
-        MyAccountPage myAccountPage = new MyAccountPage(driver);
-        driver.getCurrentUrl();
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(myAccountPage.pageContainName(),"Page not found.");
-
     }
 
     @Test(description = "Show wishlist.")
