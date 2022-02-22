@@ -33,7 +33,7 @@ public class IMarketWebTest {
         SearchResultPage searchResultPage = new SearchResultPage(driver);
         List<WebElement> searchProductResults = searchResultPage.getProductResults();
 
-        Assert.assertFalse(searchProductResults.isEmpty(), "Sorry, there are no such products :(");
+        Assert.assertFalse(searchProductResults.isEmpty(), "Sorry, there are no such products");
 
         List<WebElement> productTitles = searchResultPage.getProductTitles();
 

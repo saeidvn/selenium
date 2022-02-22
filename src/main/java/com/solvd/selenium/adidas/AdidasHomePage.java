@@ -1,11 +1,18 @@
 package com.solvd.selenium.adidas;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class AdidasHomePage {
 
@@ -59,6 +66,9 @@ public class AdidasHomePage {
     private WebElement loginEmail;
 
     @FindBy(xpath = "//input[@id='login-password']")
+    private WebElement passwordBox;
+
+    @FindBy(xpath = "//input[@id='login-password']")
     private WebElement loginPassword;
 
     @FindBy(xpath = "//*[@data-auto-id='login-form-login']")
@@ -77,8 +87,13 @@ public class AdidasHomePage {
     @FindBy(css = ".filter-panel-cta-btn___PnD1m")
     private WebElement filterButton;
 
-    @FindBy(css = ".header-cross-link___iEGVx")
-    private WebElement reebokButton;
+//    @FindBy(xpath = "//a[@manual_cm_sp='header-_-customerinfo-_-Help']")
+    @FindBy(xpath = "//div[@class='inner___1T3DW']//a[@href='/us/help']")
+//    @FindBy(xpath = "//a[@href='/us/help']")
+    public WebElement helpButton;
+
+    @FindBy(xpath = "//div[@class='gl-wishlist-icon wishlist_button___3ppwb outlined-icon-color___2xwB3']")
+    public WebElement wishList;
 
     public AdidasHomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -86,11 +101,17 @@ public class AdidasHomePage {
         this.driver.get("https://www.adidas.com/us");
     }
 
+    public boolean isPageOpened(){
+        return driver.getCurrentUrl().equals("https://www.adidas.com/us");
+    }
+
     public void typeInSearchInput(String productName){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         searchInput.sendKeys(productName);
     }
 
     public void submitSearchButton(){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         searchButton.submit();
     }
 
@@ -104,45 +125,41 @@ public class AdidasHomePage {
 
     public void typeLoginEmail(String email) {
         loginEmail.sendKeys(email);
+//        clickLoginButton();
+//        loginBox.sendKeys(email);
     }
 
     public void submitContinueButton() {
         continueButton.submit();
     }
 
+    public void clickPasswordBox() {
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement webElement = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(passwordBox));
+        webElement.click();
+    }
+
     public void typeLoginPassword(String password) {
         loginPassword.sendKeys(password);
+//        clickPasswordBox();
+//        passwordBox.sendKeys(password);
     }
 
     public void submitLoginAccountButton() {
         loginAccountButton.submit();
     }
 
-    public void submitReebokButton() {
-        reebokButton.click();
+    public void clickHelpButton() {
+//        driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+        WebElement webElement = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(helpButton));
+        webElement.click();
+//        helpButton.click();
     }
 
-    public WebElement getSearchInput() {
-        return searchInput;
+    public void clickWishListButton() {
+        wishList.click();
     }
 
-    public WebElement getSearchButton() {
-        return searchButton;
-    }
-
-    public WebElement getLoginButton() {
-        return loginButton;
-    }
-
-    public WebElement getLoginEmail() {
-        return loginEmail;
-    }
-
-    public WebElement getLoginPassword() {
-        return loginPassword;
-    }
-
-    public WebElement getLoginAccountButton() {
-        return loginAccountButton;
-    }
 }
