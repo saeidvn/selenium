@@ -28,10 +28,8 @@ public class AdidasTest {
     @Test(description = "Search some product with a search bar")
     public void checkProductName() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
-        adidasHomePage.typeInSearchInput("BLACKHAWKS HOME AUTHENTIC JERSEY");
-        adidasHomePage.submitSearchButton();
-
-        SearchResultPage searchResultPage = new SearchResultPage(driver);
+        adidasHomePage.typeInSearchInput("BLACKHAWKS HOME AUTHENTIC JERSEY\n");
+        SearchResultPage searchResultPage = adidasHomePage.clickSearchButton();
         List<WebElement> searchProductResult = searchResultPage.getProductResult();
 
         Assert.assertTrue(searchProductResult.isEmpty(), "Sorry, there are no such products");
@@ -40,10 +38,8 @@ public class AdidasTest {
     @Test(description = "Type special character in search bar")
     public void specialCharacterTest() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
-        adidasHomePage.typeInSearchInput("@!?#$%&*");
-        adidasHomePage.submitSearchButton();
-
-        SearchResultPage searchResultPage = new SearchResultPage(driver);
+        adidasHomePage.typeInSearchInput("@!?#$%&*\n");
+        SearchResultPage searchResultPage = adidasHomePage.clickSearchButton();
         List<WebElement> searchProductResult = searchResultPage.getProductResult();
 
         Assert.assertTrue(searchProductResult.isEmpty(), "OOPS – NO RESULTS FOR '@!?#$%&*'.");
@@ -52,7 +48,7 @@ public class AdidasTest {
     @Test(description = "Open help page.")
     public void checkHelpButton() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
-        adidasHomePage.clickHelpButton();
+//        adidasHomePage.clickHelpButton();
 
 //        driver.navigate().to("https://www.adidas.com/us/help");
 //        String pageTitle = driver.getTitle();
@@ -75,11 +71,14 @@ public class AdidasTest {
         Assert.assertTrue(adidasHomePage.isLoginBoxIsVisible());
 
         adidasHomePage.enterTextToLoginBox(EMAIL);
-        Assert.assertEquals(adidasHomePage.getTextFromLoginBox(), EMAIL, "Data not equals");
+        Assert.assertEquals(adidasHomePage.getTextFromLoginBox(), EMAIL, "Email not equals");
 
         adidasHomePage.submitContinueButton();
-        adidasHomePage.clickPasswordBox();
-        adidasHomePage.typeLoginPassword(PASSWORD);
+        Assert.assertTrue(adidasHomePage.isPasswordBoxIsVisible());
+
+        adidasHomePage.enterPasswordToPasswordBox(PASSWORD);
+        Assert.assertEquals(adidasHomePage.getTextFromPasswordBox(), PASSWORD, "Password not equals");
+
         adidasHomePage.submitLoginAccountButton();
 
 //        MyAccountPage myAccountPage = new MyAccountPage(driver);

@@ -20,6 +20,8 @@ public class AdidasHomePage {
 
     private WebDriver driver;
 
+    private static final String ADIDAS = "https://www.adidas.com/us";
+
     @FindBy(xpath = "//input[@class='searchinput___zXLAR']")
     private WebElement searchInput;
 
@@ -99,23 +101,23 @@ public class AdidasHomePage {
     public AdidasHomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        this.driver.get("https://www.adidas.com/us");
+        this.driver.get(ADIDAS);
     }
 
     public boolean isPageOpened() {
-        return driver.getCurrentUrl().equals("https://www.adidas.com/us");
+        return driver.getCurrentUrl().equals(ADIDAS);
     }
 
     public void typeInSearchInput(String productName) {
-        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(searchInput));
-        webElement.click();
+        new WebDriverWait(driver, ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(searchInput)).sendKeys(productName);
     }
 
-    public void submitSearchButton() {
-        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
+    public SearchResultPage clickSearchButton() {
+         new WebDriverWait(driver, ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(searchButton));
-        webElement.click();
+         searchButton.click();
+        return new SearchResultPage(driver);
     }
 
     public boolean isLoginBoxIsVisible(){
@@ -127,8 +129,12 @@ public class AdidasHomePage {
         loginBox.sendKeys(email);
     }
 
-    public String getTextFromLoginBox(){
+    public String getTextFromLoginBox() {
         return loginBox.getAttribute("value");
+    }
+
+    public String getTextFromPasswordBox() {
+        return passwordBox.getAttribute("value");
     }
 
     public void clickLoginButton() {
@@ -139,18 +145,17 @@ public class AdidasHomePage {
         continueButton.submit();
     }
 
-    public Boolean isPasswordBoxIsVisible() {
-        return passwordBox.isDisplayed();
-    }
-
-    public void clickPasswordBox() {
-        WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
+    public void enterPasswordToPasswordBox(String password) {
+        WebElement passwordField = new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(passwordBox));
-        webElement.click();
+        passwordField.click();
+        passwordBox.sendKeys(password);
     }
 
-    public void typeLoginPassword(String password) {
-        loginPassword.sendKeys(password);
+    public Boolean isPasswordBoxIsVisible() {
+        new WebDriverWait(driver, ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(passwordBox));
+        return passwordBox.isDisplayed();
     }
 
     public void submitLoginAccountButton() {
