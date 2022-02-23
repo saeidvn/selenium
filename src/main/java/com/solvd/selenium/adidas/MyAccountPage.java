@@ -1,5 +1,6 @@
 package com.solvd.selenium.adidas;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,5 +22,9 @@ public class MyAccountPage {
 
     public Boolean pageContainName() {
         return myAccount.isDisplayed();
+    }
+
+    public void closePopUp() {
+        driver.switchTo().activeElement().findElement(By.xpath("//button[@class='gl-modal__close']")).click();
     }
 }

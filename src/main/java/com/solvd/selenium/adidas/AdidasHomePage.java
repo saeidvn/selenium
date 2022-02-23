@@ -1,6 +1,5 @@
 package com.solvd.selenium.adidas;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static java.time.Duration.*;
@@ -102,7 +100,6 @@ public class AdidasHomePage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         this.driver.get("https://www.adidas.com/us");
-//        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
     }
 
     public boolean isPageOpened() {
@@ -113,16 +110,12 @@ public class AdidasHomePage {
         WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(searchInput));
         webElement.click();
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        searchInput.sendKeys(productName);
     }
 
     public void submitSearchButton() {
         WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(searchButton));
         webElement.click();
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        searchButton.submit();
     }
 
     public boolean isLoginBoxIsVisible(){
@@ -146,8 +139,11 @@ public class AdidasHomePage {
         continueButton.submit();
     }
 
+    public Boolean isPasswordBoxIsVisible() {
+        return passwordBox.isDisplayed();
+    }
+
     public void clickPasswordBox() {
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement webElement = new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(passwordBox));
         webElement.click();
@@ -155,8 +151,6 @@ public class AdidasHomePage {
 
     public void typeLoginPassword(String password) {
         loginPassword.sendKeys(password);
-//        clickPasswordBox();
-//        passwordBox.sendKeys(password);
     }
 
     public void submitLoginAccountButton() {
@@ -164,8 +158,6 @@ public class AdidasHomePage {
     }
 
     public void clickHelpButton() {
-//        WebDriverWait wait = new WebDriverWait(this.driver, ofSeconds(20));
-//        wait.until(ExpectedConditions.elementToBeClickable(helpButton));
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
         helpButton.click();
     }

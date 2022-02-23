@@ -14,6 +14,9 @@ public class AdidasTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdidasTest.class);
 
+    private static final String EMAIL = "x7en0mx@yahoo.com";
+    private static final String PASSWORD = "THP-bmy.ack1xed*amq";
+
     private WebDriver driver;
 
     @BeforeClass
@@ -31,7 +34,7 @@ public class AdidasTest {
         SearchResultPage searchResultPage = new SearchResultPage(driver);
         List<WebElement> searchProductResult = searchResultPage.getProductResult();
 
-        Assert.assertFalse(searchProductResult.isEmpty(), "Sorry, there are no such products");
+        Assert.assertTrue(searchProductResult.isEmpty(), "Sorry, there are no such products");
     }
 
     @Test(description = "Type special character in search bar")
@@ -71,13 +74,17 @@ public class AdidasTest {
         adidasHomePage.clickLoginButton();
         Assert.assertTrue(adidasHomePage.isLoginBoxIsVisible());
 
-        adidasHomePage.enterTextToLoginBox("x7en0mx@yahoo.com");
-        Assert.assertEquals(adidasHomePage.getTextFromLoginBox(), "x7en0mx@yahoo.com", "Data not equals");
+        adidasHomePage.enterTextToLoginBox(EMAIL);
+        Assert.assertEquals(adidasHomePage.getTextFromLoginBox(), EMAIL, "Data not equals");
 
         adidasHomePage.submitContinueButton();
         adidasHomePage.clickPasswordBox();
-        adidasHomePage.typeLoginPassword("THP-bmy.ack1xed*amq");
+        adidasHomePage.typeLoginPassword(PASSWORD);
         adidasHomePage.submitLoginAccountButton();
+
+//        MyAccountPage myAccountPage = new MyAccountPage(driver);
+//        myAccountPage.closePopUp();
+
     }
 
     @Test(description = "Show wishlist.")
