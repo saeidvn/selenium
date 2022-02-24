@@ -93,7 +93,7 @@ public class AccessoriesPage {
     }
 
     public void closePopUp() {
-        driver.switchTo().activeElement().findElement(By.xpath("//button[@class='gl-modal__close']")).click();
+        driver.switchTo().activeElement().findElement(By.cssSelector("#modal-root > div > div > button")).click();
     }
 
     public Boolean isFilterButtonIsVisible() {
@@ -113,7 +113,8 @@ public class AccessoriesPage {
     }
 
     public Boolean isApplyButtonIsVisible() {
-        return applyButton.isDisplayed();
+      return new WebDriverWait(driver, ofSeconds(50))
+                .until(ExpectedConditions.visibilityOf(applyButton)).isDisplayed();
     }
 
     public List<String> getAccessoriesResult() {

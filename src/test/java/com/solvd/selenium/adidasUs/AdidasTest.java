@@ -118,9 +118,9 @@ public class AdidasTest {
         accessoriesPage.clickLowPriceToHigh();
         Assert.assertTrue(accessoriesPage.isLowPriceToHighButtonIsVisible(),
                 "Low price to high button not visible.");
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
 
         LowPriceToHigh lowPriceToHigh = accessoriesPage.clickApplyButton();
-        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
 
         accessoriesPage.closePopUp();
         List<WebElement> lowPriceResult = lowPriceToHigh.getLowPriceResult();
@@ -137,9 +137,10 @@ public class AdidasTest {
         accessoriesPage.clickHighPriceToLow();
         Assert.assertTrue(accessoriesPage.isHighPriceToLowButtonIsVisible(),
                 "High price to low button not visible.");
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
+
 
         HighPriceToLow highPriceToLow = accessoriesPage.clickApply();
-        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
 
         accessoriesPage.closePopUp();
         List<WebElement> highPriceResult = highPriceToLow.getHighPriceResult();
@@ -156,9 +157,9 @@ public class AdidasTest {
         accessoriesPage.clickTopSellersButton();
         Assert.assertTrue(accessoriesPage.isTopSellersButtonIsVisible(),
                 "Top sellers button not visible.");
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
 
         TopSellers topSellers = accessoriesPage.applyButton();
-        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
 
         accessoriesPage.closePopUp();
         List<WebElement> topSellersResult = topSellers.getTopSellersResult();
