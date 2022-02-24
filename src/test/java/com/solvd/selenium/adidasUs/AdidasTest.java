@@ -85,9 +85,6 @@ public class AdidasTest {
 
         adidasHomePage.submitLoginAccountButton();
 
-//        MyAccountPage myAccountPage = new MyAccountPage(driver);
-//        myAccountPage.closePopUp();
-
     }
 
     @Test(description = "Show wishlist.")
@@ -117,7 +114,7 @@ public class AdidasTest {
 
         accessoriesPage.clickLowPriceToHigh();
         Assert.assertTrue(accessoriesPage.isLowPriceToHighButtonIsVisible(),
-                "Low price to high button not visible.");
+                "Low price to high button is not visible.");
         Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
 
         LowPriceToHigh lowPriceToHigh = accessoriesPage.clickApplyButton();
@@ -136,9 +133,8 @@ public class AdidasTest {
 
         accessoriesPage.clickHighPriceToLow();
         Assert.assertTrue(accessoriesPage.isHighPriceToLowButtonIsVisible(),
-                "High price to low button not visible.");
+                "High price to low button is not visible.");
         Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
-
 
         HighPriceToLow highPriceToLow = accessoriesPage.clickApply();
 
@@ -156,7 +152,7 @@ public class AdidasTest {
 
         accessoriesPage.clickTopSellersButton();
         Assert.assertTrue(accessoriesPage.isTopSellersButtonIsVisible(),
-                "Top sellers button not visible.");
+                "Top sellers button is not visible.");
         Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible(), "Apply button should be visible");
 
         TopSellers topSellers = accessoriesPage.applyButton();

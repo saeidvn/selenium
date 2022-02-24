@@ -59,11 +59,11 @@ public class AccessoriesPage {
         lowPriceToHighButton.click();
     }
 
-    public HighPriceToLow clickApply() {
+    public LowPriceToHigh clickApplyButton() {
         new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
-        return new HighPriceToLow(driver);
+        return new LowPriceToHigh(driver);
     }
 
     public void clickHighPriceToLow() {
@@ -72,28 +72,28 @@ public class AccessoriesPage {
         highPriceToLowButton.click();
     }
 
-    public LowPriceToHigh clickApplyButton() {
+    public HighPriceToLow clickApply() {
         new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
-        return new LowPriceToHigh(driver);
+        return new HighPriceToLow(driver);
     }
 
-    public TopSellers clickTopSellersButton() {
-        new WebDriverWait(driver, ofSeconds(10)).until(ExpectedConditions.visibilityOf(topSellersButton));
+    public void clickTopSellersButton() {
+        new WebDriverWait(driver, ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(topSellersButton));
         topSellersButton.click();
-        return new TopSellers(driver);
     }
 
     public TopSellers applyButton() {
-        new WebDriverWait(driver, ofSeconds(10))
+        new WebDriverWait(driver, ofSeconds(30))
                 .until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         return new TopSellers(driver);
     }
 
     public void closePopUp() {
-        driver.switchTo().activeElement().findElement(By.cssSelector("#modal-root > div > div > button")).click();
+        driver.switchTo().activeElement().findElement(By.xpath("//button[@class='gl-modal__close']")).click();
     }
 
     public Boolean isFilterButtonIsVisible() {
