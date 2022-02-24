@@ -1,4 +1,4 @@
-package com.solvd.selenium.adidas;
+package com.solvd.selenium.adidasUs;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

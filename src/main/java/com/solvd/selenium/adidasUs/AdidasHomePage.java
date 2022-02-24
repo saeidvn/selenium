@@ -1,4 +1,4 @@
-package com.solvd.selenium.adidas;
+package com.solvd.selenium.adidasUs;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,9 +89,6 @@ public class AdidasHomePage {
     @FindBy(css = ".filter-panel-cta-btn___PnD1m")
     private WebElement filterButton;
 
-//    @FindBy(xpath = "//a[@manual_cm_sp='header-_-customerinfo-_-Help']")
-//    @FindBy(xpath = "//div[@class='inner___1T3DW']//a[@href='/us/help']")
-//    @FindBy(xpath = "//a[@href='/us/help']")
     @FindBy(xpath = "//*[contains(@class,'inner___1T3DW')]//*[contains(@manual_cm_sp,'Help')]")
     public WebElement helpButton;
 
@@ -120,7 +117,7 @@ public class AdidasHomePage {
         return new SearchResultPage(driver);
     }
 
-    public boolean isLoginBoxIsVisible(){
+    public boolean isLoginBoxIsVisible() {
         return loginBox.isDisplayed();
     }
 
@@ -163,7 +160,7 @@ public class AdidasHomePage {
     }
 
     public void clickHelpButton() {
-        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         helpButton.click();
     }
 

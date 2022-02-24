@@ -1,5 +1,9 @@
-package com.solvd.selenium.adidas;
+package com.solvd.selenium.adidasUs;
 
+import com.solvd.selenium.adidasUk.AccessoriesPage;
+import com.solvd.selenium.adidasUk.HighPriceToLow;
+import com.solvd.selenium.adidasUk.LowPriceToHigh;
+import com.solvd.selenium.adidasUk.TopSellers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -101,6 +105,63 @@ public class AdidasTest {
             item.getText();
             LOGGER.info("\nTitle: " + item.getText());
         });
+    }
+
+    @Test
+    public void CheckAccessoriesPage() {
+        AccessoriesPage accessoriesPage = new AccessoriesPage(driver);
+        Assert.assertTrue(accessoriesPage.isPageOpened(), "Page not found.");
+
+        accessoriesPage.clickFilterButton();
+        Assert.assertTrue(accessoriesPage.isFilterButtonIsVisible(), "Filter button is not visible.");
+
+        accessoriesPage.clickLowPriceToHigh();
+        Assert.assertTrue(accessoriesPage.isLowPriceToHighButtonIsVisible(),
+                "Low price to high button not visible.");
+
+        LowPriceToHigh lowPriceToHigh = accessoriesPage.clickApplyButton();
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
+
+        accessoriesPage.closePopUp();
+        List<WebElement> lowPriceResult = lowPriceToHigh.getLowPriceResult();
+    }
+
+    @Test
+    public void CheckHighToLowPage() {
+        AccessoriesPage accessoriesPage = new AccessoriesPage(driver);
+        Assert.assertTrue(accessoriesPage.isPageOpened(), "Page not found.");
+
+        accessoriesPage.clickFilterButton();
+        Assert.assertTrue(accessoriesPage.isFilterButtonIsVisible(), "Filter button is not visible.");
+
+        accessoriesPage.clickHighPriceToLow();
+        Assert.assertTrue(accessoriesPage.isHighPriceToLowButtonIsVisible(),
+                "High price to low button not visible.");
+
+        HighPriceToLow highPriceToLow = accessoriesPage.clickApply();
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
+
+        accessoriesPage.closePopUp();
+        List<WebElement> highPriceResult = highPriceToLow.getHighPriceResult();
+    }
+
+    @Test
+    public void CheckTopSellersPage() {
+        AccessoriesPage accessoriesPage = new AccessoriesPage(driver);
+        Assert.assertTrue(accessoriesPage.isPageOpened(), "Page not found.");
+
+        accessoriesPage.clickFilterButton();
+        Assert.assertTrue(accessoriesPage.isFilterButtonIsVisible(), "Filter button is not visible.");
+
+        accessoriesPage.clickTopSellersButton();
+        Assert.assertTrue(accessoriesPage.isTopSellersButtonIsVisible(),
+                "Top sellers button not visible.");
+
+        TopSellers topSellers = accessoriesPage.applyButton();
+        Assert.assertTrue(accessoriesPage.isApplyButtonIsVisible());
+
+        accessoriesPage.closePopUp();
+        List<WebElement> topSellersResult = topSellers.getTopSellersResult();
     }
 
     @AfterClass
