@@ -92,7 +92,7 @@ public class AdidasHomePage {
     public WebElement helpButton;
 
     @FindBy(xpath = "//div[@class='gl-wishlist-icon wishlist_button___3ppwb outlined-icon-color___2xwB3']")
-    public WebElement wishList;
+    public WebElement wishListButton;
 
     public AdidasHomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -101,7 +101,7 @@ public class AdidasHomePage {
     }
 
     public boolean isPageOpened() {
-        return driver.getCurrentUrl().equals(ADIDAS);
+        return this.driver.getCurrentUrl().equals(ADIDAS);
     }
 
     public void typeInSearchInput(String productName) {
@@ -165,7 +165,7 @@ public class AdidasHomePage {
     }
 
     public void clickWishListButton() {
-        wishList.click();
+        wishListButton.click();
     }
 
 }

@@ -96,18 +96,17 @@ public class AdidasTest {
     @Test(description = "Show wishlist.")
     public void checkWishList() {
         AdidasHomePage adidasHomePage = new AdidasHomePage(driver);
+        Assert.assertTrue(adidasHomePage.isPageOpened(), "Adidas home page not found.");
+
+        Assert.assertTrue(adidasHomePage.wishListButton.isDisplayed(), "WishList button not visible.");
         adidasHomePage.clickWishListButton();
 
         WishList wishList = new WishList(driver);
-        List<WebElement> wishListResult = wishList.getWishListResult();
+        Assert.assertTrue(wishList.isPageOpened(), "WishList not found.");
+
+        List<String> wishListResult = wishList.getWishListResult();
         Assert.assertTrue(wishListResult.isEmpty(), "Wishlist is empty.");
 
-        List<WebElement> wishListProducts = wishList.getWishListTitle();
-
-        wishListProducts.forEach(item -> {
-            item.getText();
-            LOGGER.info("\nTitle: " + item.getText());
-        });
     }
 
     @Test(description = "Check to use low price filter.")
