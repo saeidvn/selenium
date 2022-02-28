@@ -1,4 +1,4 @@
-package com.solvd.selenium.adidasUs;
+package com.solvd.selenium.adidasUsUk;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,8 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 import static java.time.Duration.*;
 
@@ -89,7 +87,8 @@ public class AdidasHomePage {
     @FindBy(css = ".filter-panel-cta-btn___PnD1m")
     private WebElement filterButton;
 
-    @FindBy(xpath = "//*[contains(@class,'inner___1T3DW')]//*[contains(@manual_cm_sp,'Help')]")
+    @FindBy(xpath = "//a[@manual_cm_sp='header-_-customerinfo-_-Help']")
+//    @FindBy(css = "a[manual_cm_sp='header-_-customerinfo-_-Help']")
     public WebElement helpButton;
 
     @FindBy(xpath = "//div[@class='gl-wishlist-icon wishlist_button___3ppwb outlined-icon-color___2xwB3']")
@@ -149,7 +148,7 @@ public class AdidasHomePage {
         passwordBox.sendKeys(password);
     }
 
-    public Boolean isPasswordBoxIsVisible() {
+    public boolean isPasswordBoxIsVisible() {
         new WebDriverWait(driver, ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(passwordBox));
         return passwordBox.isDisplayed();
@@ -160,7 +159,8 @@ public class AdidasHomePage {
     }
 
     public void clickHelpButton() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        new WebDriverWait(driver, ofSeconds(30))
+                .until(ExpectedConditions.visibilityOf(helpButton));
         helpButton.click();
     }
 

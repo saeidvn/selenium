@@ -15,12 +15,12 @@ import static java.time.Duration.ofSeconds;
 
 public class AccessoriesPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     private static final String URL = "https://www.adidas.co.uk/y_3-accessories";
 
-    @FindBy(xpath = "//*[@class = 'plp-container-with-masking']")
-    private List<WebElement> accessoriesResult;
+    @FindBy(xpath = "//div[@class = 'badge-container___DVUWN']/div/div")
+    private List<WebElement> productPrices;
 
     @FindBy(css = ".filter-panel-cta-btn___PnD1m")
     private WebElement filterButton;
@@ -44,17 +44,17 @@ public class AccessoriesPage {
     }
 
     public boolean isPageOpened() {
-        return driver.getCurrentUrl().equals(URL);
+        return this.driver.getCurrentUrl().equals(URL);
     }
 
     public void clickFilterButton() {
-        new WebDriverWait(driver, ofSeconds(10))
+        new WebDriverWait(driver, ofSeconds(30))
                 .until(ExpectedConditions.visibilityOf(filterButton));
         filterButton.click();
     }
 
     public void clickLowPriceToHigh() {
-        new WebDriverWait(driver, ofSeconds(10))
+        new WebDriverWait(driver, ofSeconds(30))
                 .until(ExpectedConditions.visibilityOf(lowPriceToHighButton));
         lowPriceToHighButton.click();
     }
@@ -96,29 +96,38 @@ public class AccessoriesPage {
         driver.switchTo().activeElement().findElement(By.xpath("//button[@class='gl-modal__close']")).click();
     }
 
-    public Boolean isFilterButtonIsVisible() {
-        return filterButton.isDisplayed();
+    public boolean isFilterButtonIsVisible() {
+        return this.filterButton.isDisplayed();
     }
 
-    public Boolean isLowPriceToHighButtonIsVisible() {
-        return lowPriceToHighButton.isDisplayed();
+    public boolean isLowPriceToHighButtonIsVisible() {
+        return this.lowPriceToHighButton.isDisplayed();
     }
 
-    public Boolean isHighPriceToLowButtonIsVisible() {
-        return highPriceToLowButton.isDisplayed();
+    public boolean isHighPriceToLowButtonIsVisible() {
+        return this.highPriceToLowButton.isDisplayed();
     }
 
-    public Boolean isTopSellersButtonIsVisible() {
-        return topSellersButton.isDisplayed();
+    public boolean isTopSellersButtonIsVisible() {
+        return this.topSellersButton.isDisplayed();
     }
 
-    public Boolean isApplyButtonIsVisible() {
+    public boolean isApplyButtonIsVisible() {
       return new WebDriverWait(driver, ofSeconds(50))
                 .until(ExpectedConditions.visibilityOf(applyButton)).isDisplayed();
     }
 
-    public List<String> getAccessoriesResult() {
-        return accessoriesResult.stream().map(o -> o.getText()).collect(Collectors.toList());
+    public List<String> getProductPricesAsStrings() {
+        return this.productPrices.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> getProductPricesAsNumbers() {
+        return this.getProductPricesAsStrings().stream()
+                .map(price -> price.replaceAll("[^0-9]", ""))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
 }

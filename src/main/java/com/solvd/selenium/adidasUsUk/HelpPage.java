@@ -1,16 +1,18 @@
-package com.solvd.selenium.adidasUs;
+package com.solvd.selenium.adidasUsUk;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HelpPage {
 
     public WebDriver driver;
 
     @FindBy(xpath = "//div[@class='count___1ZIhY gl-body--s']")
-    private WebElement helpResult;
+    private List<WebElement> helpResult;
 
     public HelpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -18,7 +20,4 @@ public class HelpPage {
         this.driver.get(driver.getCurrentUrl());
     }
 
-    public WebElement getHelpResult() {
-        return helpResult;
-    }
 }
